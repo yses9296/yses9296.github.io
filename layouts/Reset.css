@@ -1,0 +1,44 @@
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+@import url('https://webfontworld.github.io/NexonLv2Gothic/NexonLv2Gothic.css');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+/* Layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'NexonLv2Gothic';
+}
+
+ul, li, ol {
+    list-style: none;
+}
+a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+img {
+    display: block;
+    width: 100%;
+}
+address {
+    font-style: normal;
+    color: #000;
+}
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ir_pm {
+    display: block;
+    content: '';
+    font-size: 0;
+    text-indent: -9999em;
+}
