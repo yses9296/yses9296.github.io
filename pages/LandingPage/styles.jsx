@@ -22,7 +22,7 @@ export const MainSVG = styled(MainIcon)`
         fill: #fff;
         stroke: #000;
 
-        &>textPath:first-child{
+        &>textPath:first-of-type{
             fill:#6BA7E5;
             letter-spacing: 12px;
         }

@@ -14,6 +14,7 @@ const config = {
             '@components': path.resolve(__dirname, 'components'),
             '@layouts': path.resolve(__dirname, 'layouts'),
             '@pages': path.resolve(__dirname, 'pages'),
+            '@assets': path.resolve(__dirname, 'assets'),
         },
     },
 
@@ -23,41 +24,57 @@ const config = {
 
     module : {
         rules: [
-            {
-                test: /\.jsx?$/,
+        {
+            test: /\.jsx?$/,
+            exclude: path.join(__dirname, 'node_modules'),
+            use: {
                 loader: 'babel-loader',
                 options: {
                     presets: [
                         [
-                          '@babel/preset-env',
-                          {
-                            targets: { browsers: ['last 2 chrome versions'] },
-                            debug: isDevelopment,
-                          },
+                            '@babel/preset-env',
+                            {
+                                targets: { browsers: ['last 2 chrome versions'] },
+                                debug: isDevelopment,
+                            },
                         ],
                         '@babel/preset-react',
-                      ],
-                      env: {
-                        development: {
-                          plugins: [['@emotion', { sourceMap: true }], require.resolve('react-refresh/babel')],
-                        },
-                        production: {
-                          plugins: ['@emotion'],
-                        },
-                      },
+                    ],
+                    env: {
+                    development: {
+                        plugins: [['@emotion', { sourceMap: true }], require.resolve('react-refresh/babel')],
+                    },
+                    production: {
+                        plugins: ['@emotion'],
+                    },
+                    },
                 },
-                exclude: path.join(__dirname, 'node_modules')
-                
-            },
-            {
-                test: /\.css?$/,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.svg$/i,
-                issuer: /\.[jt]sx?$/,
-                use: ['@svgr/webpack'],
-            },
+            }
+            
+        },
+        {
+            test: /\.css?$/,
+            use: ['style-loader', 'css-loader'],
+        },
+        {
+            test: /\.svg$/i,
+            issuer: /\.[jt]sx?$/,
+            use: {
+                loader: '@svgr/webpack',
+                options: {
+                    name: '[name].[ext]'
+                },
+            }
+        },
+        {
+            test: /\.(png|jpe?g|gif)$/i,
+            use: {
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                },
+            }
+        },
         ]
     },
     plugins: [new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? 'development' : 'production' })],
